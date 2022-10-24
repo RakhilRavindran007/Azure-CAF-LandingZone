@@ -1,6 +1,6 @@
 jobs:
     - job: TerraformPlan
-      displayName: ArchType Plan
+      displayName: Connectivity Plan
       steps:
           - task: TerraformInstaller@0
             displayName: Terraform Install
