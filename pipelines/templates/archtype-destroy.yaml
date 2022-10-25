@@ -1,0 +1,23 @@
+jobs: 
+  - job: ArchTypeDestroy
+    displayName: Arch Type Destroy
+    steps:
+        - task: TerraformInstaller@0
+          inputs:
+            terraformVersion: '${{parameters.terraform_version}}'
+        - task: TerraformTaskV3@3
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '${{parameters.workingDirectory}}'
+            backendServiceArm: '${{parameters.backendServiceArm}}'
+            backendAzureRmResourceGroupName: '${{parameters.backendAzureRmResourceGroupName}}'
+            backendAzureRmStorageAccountName: '${{parameters.backendAzureRmStorageAccountName}}'
+            backendAzureRmContainerName: '${{parameters.backendAzureRmContainerName}}'
+            backendAzureRmKey: '${{parameters.backendAzureRmKey}}'
+        - task: TerraformTaskV3@3
+          inputs:
+            provider: 'azurerm'
+            command: 'destroy'
+            workingDirectory: '${{parameters.workingDirectory}}'
+            environmentServiceNameAzureRM: '${{parameters.backendServiceArm}}'
