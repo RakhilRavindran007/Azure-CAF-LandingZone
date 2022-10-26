@@ -42,7 +42,7 @@ stages:
           - template: templates/archtype-plan.yaml
             parameters:
                 terraform_version: '${{variables.terraform_version}}'
-                workingDirectory: '$(System.DefaultWorkingDirectory)/ArchType Modules'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/ArchType_Modules'
                 backendServiceArm: ${{variables.backendServiceArm}}
                 backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
                 backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
