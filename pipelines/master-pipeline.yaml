@@ -1,0 +1,50 @@
+trigger: none
+
+parameters:
+    - name: Action
+      displayName: Terraform Action
+      default: ArchType Plan
+      type: string
+      values:
+          - ArchType Plan
+          - ArchType Apply
+          - ArchType Destroy
+          - Connectivity Plan
+          - Connectivity Apply
+          - Connectivity Destroy
+          - Identity Plan
+          - Identity Apply
+          - Identity Destroy
+          - Management Plan
+          - Management Apply
+          - Management Destroy
+
+variables:
+    - group: caf-terraform-eslz
+    - name: terraform_version
+      value: '1.3.3'
+    - name: backendServiceArm
+      value: 'spn-ado-azure-deployment-backend'
+    - name: backendAzureRmResourceGroupName
+      value: 'rg-terraform-dev-we-01'
+    - name: backendAzureRmStorageAccountName
+      value: 'stoterraformdevwe432'
+    - name: backendAzureRmContainerName
+      value: 'tfstate'
+    - name: environmentServiceNameAzureRM
+      value: 'spn-ado-azure-deployment-backend'
+
+stages:
+    - stage: ArchTypePlan
+      displayName: ArchType Plan
+      condition: contains ('${{parameters.Action}}', 'ArchType Plan')
+      jobs:
+          - template: templates/archtype-plan.yaml
+            parameters:
+                workingDirectory: '$(System.DefaultWorkingDirectory)/ArchType Modules'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'archtypeplan.tfstate'
+                environmentServiceNameAzureRM : ${{variables.environmentServiceNameAzureRM}}
