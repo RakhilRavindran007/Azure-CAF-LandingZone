@@ -41,6 +41,7 @@ stages:
       jobs:
           - template: templates/archtype-plan.yaml
             parameters:
+                terraform_version: '${{variables.terraform_version}}'
                 workingDirectory: '$(System.DefaultWorkingDirectory)/ArchType Modules'
                 backendServiceArm: ${{variables.backendServiceArm}}
                 backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
