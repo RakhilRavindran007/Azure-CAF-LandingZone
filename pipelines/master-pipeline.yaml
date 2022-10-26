@@ -79,3 +79,48 @@ stages:
                 backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
                 backendAzureRmKey: 'archtypeapply.tfstate'
                 environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+    
+    - stage: ArchTypePlan
+      displayName: Connectivity Plan
+      condition: contains ('${{parameters.Action}}', 'Connectivity Plan')
+      jobs:
+          - template: templates/connectivity-plan.yaml
+            parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Connectivity_Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'connectivityplan.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+
+    - stage: ConnectivityApply
+      displayName: Connectivity Apply
+      condition: contains('${{parameters.Action}}', 'Connectivity Apply')
+      jobs:
+        - template: templates/connectivity-apply.yaml
+          parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Connectivity Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'connectivityapply.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+    
+    - stage: ConnectivityDestroy
+      displayName: Connectivity Destroy
+      condition: contains('${{parameters.Action}}', 'Connectivity Destroy')
+      jobs:
+        - template: templates/connectivity-destroy.yaml
+          parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Connectivity Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'connectivityapply.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
