@@ -49,3 +49,18 @@ stages:
                 backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
                 backendAzureRmKey: 'archtypeplan.tfstate'
                 environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+
+    - stage: ArchTypeApply
+      displayName: ArchType Apply
+      condition: contains('${{parameters.Action}}', 'ArchType Apply')
+      jobs:
+        - template: templates/archtype-apply.yaml
+          parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Archtype_Modules'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'archtypeapply.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'  
