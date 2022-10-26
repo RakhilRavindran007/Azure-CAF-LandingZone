@@ -80,7 +80,7 @@ stages:
                 backendAzureRmKey: 'archtypeapply.tfstate'
                 environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
     
-    - stage: ArchTypePlan
+    - stage: ConnectivityPlan
       displayName: Connectivity Plan
       condition: contains ('${{parameters.Action}}', 'Connectivity Plan')
       jobs:
