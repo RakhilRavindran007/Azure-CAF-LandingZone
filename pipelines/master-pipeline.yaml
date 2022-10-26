@@ -87,7 +87,7 @@ stages:
           - template: templates/connectivity-plan.yaml
             parameters:
                 terraform_version: '${{variables.terraform_version}}'
-                workingDirectory: '$(System.DefaultWorkingDirectory)/Connectivity_Module'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Connectivity Module'
                 backendServiceArm: ${{variables.backendServiceArm}}
                 backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
                 backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
