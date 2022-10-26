@@ -47,4 +47,4 @@ stages:
                 backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
                 backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
                 backendAzureRmKey: 'archtypeplan.tfstate'
-                environmentServiceNameAzureRM : ${{variables.environmentServiceNameAzureRM}}
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment'
