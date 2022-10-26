@@ -23,4 +23,4 @@ jobs:
               provider: 'azurerm'
               command: 'apply'
               workingDirectory: '${{paramters.workingDirectory}}'
-              environmentServiceNameAzureRM: '${{parameters.backendServiceArm}}'
+              environmentServiceNameAzureRM: '${{parameters.environmentServiceNameAzureRM}}'
