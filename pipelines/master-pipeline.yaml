@@ -124,3 +124,94 @@ stages:
                 backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
                 backendAzureRmKey: 'connectivityapply.tfstate'
                 environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+              
+    - stage: IdentityPlan
+      displayName: Identity Plan
+      condition: contains ('${{parameters.Action}}', 'Identity Plan')
+      jobs:
+          - template: templates/identity-plan.yaml
+            parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Identity Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'identityyplan.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+
+    - stage: IdentityApply
+      displayName: Identity Apply
+      condition: contains('${{parameters.Action}}', 'Identity Apply')
+      jobs:
+        - template: templates/identity-apply.yaml
+          parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Identity Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'identityapply.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+    
+    - stage: IdentityDestroy
+      displayName: Identity Destroy
+      condition: contains('${{parameters.Action}}', 'Identity Destroy')
+      jobs:
+        - template: templates/identity-destroy.yaml
+          parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Identity Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'identityapply.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+
+    - stage: ManagementPlan
+      displayName: Identity Plan
+      condition: contains ('${{parameters.Action}}', 'Management Plan')
+      jobs:
+          - template: templates/management-plan.yaml
+            parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Management Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'managementplan.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+
+    - stage: ManagementApply
+      displayName: Management Apply
+      condition: contains('${{parameters.Action}}', 'Management Apply')
+      jobs:
+        - template: templates/management-apply.yaml
+          parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Management Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'managementapply.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+    
+    - stage: ManagementDestroy
+      displayName: Management Destroy
+      condition: contains('${{parameters.Action}}', 'Management Destroy')
+      jobs:
+        - template: templates/management-destroy.yaml
+          parameters:
+                terraform_version: '${{variables.terraform_version}}'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/Management Module'
+                backendServiceArm: ${{variables.backendServiceArm}}
+                backendAzureRmResourceGroupName: ${{variables.backendAzureRmResourceGroupName}}
+                backendAzureRmStorageAccountName: ${{variables.backendAzureRmStorageAccountName}}
+                backendAzureRmContainerName: ${{variables.backendAzureRmContainerName}}
+                backendAzureRmKey: 'managementapply.tfstate'
+                environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
+      
