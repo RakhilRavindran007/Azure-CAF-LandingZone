@@ -171,7 +171,7 @@ stages:
                 environmentServiceNameAzureRM : 'spn-ado-azure-deployment-backend'
 
     - stage: ManagementPlan
-      displayName: Identity Plan
+      displayName: Management Plan
       condition: contains ('${{parameters.Action}}', 'Management Plan')
       jobs:
           - template: templates/management-plan.yaml
