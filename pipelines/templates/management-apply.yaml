@@ -22,5 +22,5 @@ jobs:
             inputs:
               provider: 'azurerm'
               command: 'apply'
-              workingDirectory: '${{paramters.workingDirectory}}'
+              workingDirectory: '${{parameters.workingDirectory}}'
               environmentServiceNameAzureRM: '${{parameters.environmentServiceNameAzureRM}}'
